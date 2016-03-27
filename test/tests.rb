@@ -164,6 +164,32 @@ TESTS = [
 		{ json:'{"a":{"b":{"c":{"d":{"e":{"f":{"g":{"h":{"i":{"j":{"k":{"l":{"m":1}}}}}}}}}}}}}', opts:{wrap:false} },
 		{ json:'{"a":{"b":{"c":{"d":{"e":{"f":{"g":{"h":{"i":{"j":{"k":{"l":{"m":1}}}}}}}}}}}}}', opts:{wrap:1,short:true} },
 		{ json:"{\n  \"a\":{\n    \"b\":{\n      \"c\":{\n        \"d\":{\n          \"e\":{\n            \"f\":{\n              \"g\":{\n                \"h\":{\n                  \"i\":{\n                    \"j\":{\n                      \"k\":{\n                        \"l\":{\n                          \"m\":1\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}", opts:{wrap:1} },
+	]},
+
+	{value:{a:1, b:2, c:{a:1, b:2}, d: 3, e:4}, tests:[
+		{ json:%Q{{"e":4,"d":3,"c":{"b":2,"a":1},"b":2,"a":1}}, opts:{wrap:false, explicit_sort: [[:e, :d,],[:b, :a]]} },
+		{ json:%Q{{"e":4,"d":3,"b":2,"a":1,"c":{"b":2,"a":1}}}, opts:{wrap:false, explicit_sort: [[:e, :d,],[:b, :a, :c]]} },
+		{ json:%Q{{
+  "a":1,
+  "b":2,
+  "c":{
+    "a":1,
+    "b":2
+  },
+  "d":3,
+  "e":4
+}}, opts:{wrap:1, explicit_sort: [[:e, :d,],[:b, :a]]} },
+		{ json:%Q{{
+  "a":1,
+  "b":2,
+  "c":{
+    "a":1,
+    "b":2
+  },
+  "d":3,
+  "e":4
+}}, opts:{wrap:1, explicit_sort: [[:e, :d,],[:b, :a, :c]]} }
 	]}
+
 ]
 
