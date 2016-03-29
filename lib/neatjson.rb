@@ -96,7 +96,7 @@ module JSON
 					return "#{indent}{}" if o.empty?
 					keyvals = o.map{ |k,v| [ k.to_s.inspect, build[v,''] ] }
 					keyvals = keyvals.sort_by(&:first) if opts[:sorted]
-					keyvals = keyvals.sort{|a,b| sortfields.index(a.first) <=> sortfields.index(b.first)} if opts[:explicit_sort]
+					keyvals = keyvals.sort{|a,b| sortfields.index(a.first.strip) <=> sortfields.index(b.first.strip)} if opts[:explicit_sort]
 					keyvals = keyvals.map{ |kv| kv.join(colon1) }.join(comma)
 					one_line = "#{indent}{#{opad}#{keyvals}#{opad}}"
 					if !opts[:wrap] || (one_line.length <= opts[:wrap])
@@ -105,7 +105,7 @@ module JSON
 						if opts[:short]
 							keyvals = o.map{ |k,v| ["#{indent} #{opad}#{k.to_s.inspect}",v] }
 							keyvals = keyvals.sort_by(&:first) if opts[:sorted]
-							keyvals = keyvals.sort{|a,b| sortfields.index(a.first) <=> sortfields.index(b.first)} if opts[:explicit_sort]
+							keyvals = keyvals.sort{|a,b| sortfields.index(a.first.strip) <=> sortfields.index(b.first.strip)} if opts[:explicit_sort]
 							keyvals[0][0].sub! "#{indent} ", "#{indent}{"
 							if opts[:aligned]
 								longest = keyvals.map(&:first).map(&:length).max
@@ -124,7 +124,7 @@ module JSON
 						else
 							keyvals = o.map{ |k,v| ["#{indent}#{opts[:indent]}#{k.to_s.inspect}",v] }
 							keyvals = keyvals.sort_by(&:first) if opts[:sorted]
-							keyvals = keyvals.sort{|a,b| sortfields.index(a.first) <=> sortfields.index(b.first)} if opts[:explicit_sort]
+							keyvals = keyvals.sort{|a,b| sortfields.index(a.first.strip) <=> sortfields.index(b.first.strip)} if opts[:explicit_sort]
 							if opts[:aligned]
 								longest = keyvals.map(&:first).map(&:length).max
 								keyvals.each{ |k,v| k.replace( "%-#{longest}s" % k ) }
