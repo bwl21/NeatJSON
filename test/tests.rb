@@ -170,25 +170,21 @@ TESTS = [
 		{ json:%Q{{"e":4,"d":3,"c":{"b":2,"a":1},"b":2,"a":1}}, opts:{wrap:false, explicit_sort: [[:e, :d,],[:b, :a]]} },
 		{ json:%Q{{"e":4,"d":3,"b":2,"a":1,"c":{"b":2,"a":1}}}, opts:{wrap:false, explicit_sort: [[:e, :d,],[:b, :a, :c]]} },
 		{ json:%Q{{
-  "a":1,
-  "b":2,
-  "c":{
-    "a":1,
-    "b":2
-  },
+  "e":4,
   "d":3,
-  "e":4
+  "c":{
+    "b":2,
+    "a":1
+  },
+  "b":2,
+  "a":1
 }}, opts:{wrap:1, explicit_sort: [[:e, :d,],[:b, :a]]} },
-		{ json:%Q{{
-  "a":1,
-  "b":2,
-  "c":{
-    "a":1,
-    "b":2
-  },
-  "d":3,
-  "e":4
-}}, opts:{wrap:1, explicit_sort: [[:e, :d,],[:b, :a, :c]]} }
+		{ json:%Q{{"e":4,
+ "d":3,
+ "c":{"b":2,
+      "a":1},
+ "b":2,
+ "a":1}}, opts:{short:true, wrap:1, explicit_sort: [[:e, :d,],[:b, :a]]} }
 	]}
 
 ]
