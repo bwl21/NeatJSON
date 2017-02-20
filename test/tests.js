@@ -107,6 +107,13 @@ exports.tests = [
 		{ json:"{\"a\":42,\"b\":17}",    opts:{wrap:false,sort:function(k,v,o){ return v==o.a ? 0 : 1 } } },
 	]},
 
+	{value:{ b:17, a:42, c:20 }, tests:[
+		{ json:"{\n  \"b\":17,\n  \"c\":20,\n  \"a\":42\n}",    opts:{wrap:1, sort:function(k){     return k=='a' ? 0 : k=='b' ? 2 : 1  } } },
+		{ json:"{\n  \"b\":17,\n  \"c\":20,\n  \"a\":42\n}",    opts:{wrap:1, sort:function(k,v){   return v                            } } },
+		{ json:"{\n  \"a\":42,\n  \"c\":20,\n  \"b\":17\n}",    opts:{wrap:1, sort:function(k,v){   return -v                           } } },
+		{ json:"{\n  \"a\":42,\n  \"c\":17,\n  \"b\":20\n}",    opts:{wrap:1, sort:function(k,v,o){ return v==o.a ? 0 : v==o.b ? 2 : 1  } } },
+	]},
+	
 	{value:[1,{a:2},3], tests:[
 		{ json:'[1,{"a":2},3]' },
 		{ json:'[ 1,{ "a":2 },3 ]',                           opts:{padding:1} },
